@@ -132,6 +132,10 @@ func resourceContentTypeCreate(_ context.Context, d *schema.ResourceData, m inte
 		Fields:       []*contentful.Field{},
 	}
 
+	ct.Sys = &contentful.Sys{
+		ID: toSnakeCase(ct.Name),
+	}
+
 	if description, ok := d.GetOk("description"); ok {
 		ct.Description = description.(string)
 	}
